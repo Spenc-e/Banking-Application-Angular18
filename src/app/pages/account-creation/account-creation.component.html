@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Create Account</h2>
+    <!-- Form to create an account -->
+    <form [formGroup]="accountForm" (ngSubmit)="createAccount()">
+      <div class="mb-3">
+        <label for="initialBalance" class="form-label fw-bold h5">Initial Balance</label>
+        <input name="accountBalance"  type="number" id="initialBalance" class="form-control" formControlName="initialBalance">
+        <div *ngIf="accountForm.get('initialBalance')?.invalid && accountForm.get('initialBalance')?.touched" class="text-danger">
+          Initial balance is required and must be a positive number.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-bold h5">Account Type</label>
+        <div>
+          <!-- Radio buttons to select account type -->
+          <input name="accountType" type="radio" id="chequing" value="chequing" formControlName="accountType">
+          <label for="chequing">Chequing</label>
+        </div>
+        <div>
+          <!-- Radio buttons to select account type -->
+          <input name="accountType" type="radio" id="savings" value="savings" formControlName="accountType">
+          <label for="savings">Savings</label>
+        </div>
+        <div *ngIf="accountForm.get('accountType')?.invalid && accountForm.get('accountType')?.touched" class="text-danger">
+          Account type is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="accountForm.invalid">Create Account</button>
+    </form>
+    <div *ngIf="accountType === 'chequing'" class="mt-3">
+    <div class="alert alert-success">Chequing Account Selected</div>
+    </div>
+    <div *ngIf="accountType === 'savings'" class="mt-3">
+    <div class="alert alert-info">Savings Account Selected</div>
+    </div>
+
+    <div>
+      <!-- Table to display all accounts -->
+      <table class="table my-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">Account Type</th>
+            <th scope="col">Account Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of localArray; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ account.accountNumber }}</td>
+            <td>{{ account.accountType }}</td>
+            <td>{{ account.balance }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>

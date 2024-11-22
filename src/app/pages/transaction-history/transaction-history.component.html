@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Transaction History</h2>
+
+  <div class="mb-3">
+    <!-- Search input to filter transactions -->
+    <label for="searchInput" class="form-label">Search Transactions</label>
+    <input type="text" id="searchInput" class="form-control" [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearchChange()" placeholder="Search by sender, receiver, or amount">
+  </div>
+
+  <!-- Table to display all transactions -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Sender</th>
+        <th scope="col">Receiver</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of filteredTransactions">
+        <td>{{ transaction.sender }}</td>
+        <td>{{ transaction.receiver }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.transferDate | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
