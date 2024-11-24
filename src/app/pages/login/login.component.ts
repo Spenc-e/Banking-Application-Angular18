@@ -2,6 +2,10 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+/**
+ * Account Login Component
+ * Manages the login and registration of users
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -27,9 +31,12 @@ export class LoginComponent {
     password: ''
   };
 
+  // Router instance for navigation after successful login or registration.
   router = inject(Router);
 
-  // Method to register user
+  // Handles the new user registeration process.
+  // It first Checks if the user is already registered.
+  // If the user is not registered, adds the user to the local storage.
   onRegister() {
     const registerlocalData = localStorage.getItem("userStorageLocal");
     if (registerlocalData !== null){
@@ -44,7 +51,10 @@ export class LoginComponent {
     alert("User registered successfully");
   }
 
-  // Method to login user
+  // Handles the login process.
+  // It first checks if the user is already registered.
+  // If the user is registered, it navigates to the account creation page.
+  // If not registered, it shows an alert message.
   onLogin() {
     const localData = localStorage.getItem("userStorageLocal");
     const currentUser = localStorage.getItem("currentUser");
@@ -63,7 +73,7 @@ export class LoginComponent {
     }
   }
 
-  // Method to generate an account number
+  // Generates an account number for the user account. 
   generateUserAccountNumber(): string {
     const localData = localStorage.getItem("userStorageLocal");
     let nextNumber = 1;

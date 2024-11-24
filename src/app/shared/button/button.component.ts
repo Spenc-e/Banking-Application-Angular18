@@ -14,10 +14,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styles: []
 })
 export class ButtonComponent {
-  @Input() accountType: string = 'savings';
+  @Input() accountType: string = '';
   @Output() onClick = new EventEmitter<Event>();
 
-  // Method to get button class
   getButtonClass(): string {
     return this.accountType === 'savings' ? 'savings-class' : 'chequing-class';
   }

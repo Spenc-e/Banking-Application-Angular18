@@ -1,1 +1,10 @@
-<p>button works!</p>
+<button 
+  [ngClass]="{
+    'savings-style': accountType === 'savings',
+    'chequing-style': accountType === 'chequing'
+  }"
+  role="button"
+  aria-label="Account type selection"
+>
+  {{ accountType === 'savings' ? 'Savings Account' : 'Chequing Account' }}
+</button>

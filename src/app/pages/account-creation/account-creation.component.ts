@@ -5,6 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from '../login/login.component';
 import { SharedModule } from '../../shared/shared.module';
 
+/**
+ * Account Creation Component
+ * Allows the user to create a new account based on the account type and initial balance.
+ */
 @Component({
   selector: 'app-account-creation',
   standalone: true,
@@ -26,7 +30,7 @@ export class AccountCreationComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  // Initialize the form
+  // Lifestyle hook that sets up the form group with validators.
   ngOnInit(): void {
     this.accountForm = this.fb.group({
       accountNumber: '',
@@ -34,14 +38,14 @@ export class AccountCreationComponent implements OnInit {
       accountType: ['', Validators.required],
       balance: [0],
     });
-    // Get the local storage data
+    // Get the local storage data to check if the user is already registered.
     const registerlocalData = localStorage.getItem("accountStorageLocal");
     if (registerlocalData !== null){
       this.localArray = JSON.parse(registerlocalData);
     }
   }
 
-  // Method to create account
+  // Handles the account creation process. 
   createAccount(): void {
     let formData = this.accountForm.value
     formData.accountNumber = this.generateAccountNumber();
@@ -54,12 +58,12 @@ export class AccountCreationComponent implements OnInit {
 
   }
 
-  // Get account type
+  // Getter for account type.
   get accountType() {
     return this.accountForm.get('accountType')?.value;
   }
 
-  // Generate account number
+  // Generates an account number for the account itself.
   generateAccountNumber(): string {
     const localData = localStorage.getItem("accountStorageLocal");
     let nextNumber = 1;

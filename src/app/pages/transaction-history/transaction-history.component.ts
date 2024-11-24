@@ -2,6 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+/**
+ * Transaction History Component
+ * Manages display and filtering of banking transactions
+ * Provides search functionality for transaction records
+ */
 @Component({
   selector: 'app-transaction-history',
   standalone: true,
@@ -17,7 +22,7 @@ export class TransactionHistoryComponent implements OnInit {
   filteredTransactions: any[] = [];
   searchQuery: string = '';
 
-  // Initialize the form for transaction history
+  // Lifecycle hook that initializes the component to get the stored transaction history.
   ngOnInit(): void {
     const storedHistory = localStorage.getItem('transactionHistory');
     if (storedHistory) {
@@ -26,7 +31,7 @@ export class TransactionHistoryComponent implements OnInit {
     }
   }
 
-  // Method to search transaction
+  // A real-time search handler to filter the transaction history based on the search query.
   onSearchChange(): void {
     if (this.searchQuery) {
       this.filteredTransactions = this.transactions.filter(transaction =>
