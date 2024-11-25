@@ -1,8 +1,36 @@
-.savings-style {
-  height: 100px !important;
+/* button.component.css */
+.chequing-class {
+  background-color: #2196f3;
+  border: 2px solid #2196f3;
+  color: white;
+  text-transform: capitalize; 
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 10px 20px;
+  border-radius: 4px;
 }
 
-.chequing-style {
-  background-color: #2196f3;
+.chequing-class:hover {
+  background-color: #1976d2;
+  border-color: #1976d2;
+}
+
+.savings-class {
+  background-color: #4CAF50;
+  border: 2px solid #4CAF50;
   color: white;
+  text-transform: capitalize;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.savings-class:hover {
+  background-color: #388e3c;
+  border-color: #388e3c;
 }

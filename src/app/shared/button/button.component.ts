@@ -4,20 +4,33 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   selector: 'app-button',
   template: `
     <button
-      type="submit"
-      class="btn"
-      (click)="onClick.emit($event)"
-      [ngClass]="accountType==='savings' ? ' btn-primary':' btn-secondary'">
-      {{ accountType | titlecase }}
-    </button>
+  [type]="type"
+  [disabled]="disabled"
+  (click)="onClick.emit($event)"
+  [ngClass]="getButtonClass()"
+>
+  {{ getButtonText() }}
+</button>
   `,
-  styles: []
+  styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  @Input() accountType: string = '';
+  @Input() text: string = '';
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() disabled: boolean = false;
+  @Input() accountType: 'savings' | 'chequing' = 'savings';
+  @Input() baseClass: string = 'btn-primary';
+
   @Output() onClick = new EventEmitter<Event>();
+
+  getButtonText(): string {
+    return this.accountType === 'savings' 
+      ? 'Create Savings Account' 
+      : 'Create Chequing Account';
+  }
 
   getButtonClass(): string {
     return this.accountType === 'savings' ? 'savings-class' : 'chequing-class';
   }
+
 }
