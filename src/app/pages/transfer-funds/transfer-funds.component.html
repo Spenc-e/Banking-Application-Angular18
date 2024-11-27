@@ -1,32 +1,52 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Transfer Funds</h2>
-  <!-- Form for transfering funds -->
+
   <form [formGroup]="transferForm" (ngSubmit)="transferFunds()">
     <div class="mb-3">
-      <label for="fromAccount" class="form-label fw-bold h5">From Account Number
-        <span *ngIf="fromAccountBalance !== null" class="text-primary">
-           ({{ fromAccountBalance - getTransctionAmount() }})
-        </span>
+      <label for="fromAccount" class="form-label fw-bold h5">From Account Number</label>
+      <div class="card my-2 p-2" *ngIf="fromAccountBalance !== null">
+        <div class="text-muted">Current Balance:</div>
+        <div class="h6" [ngClass]="{'text-danger': (fromAccountBalance - getTransactionAmount)<0, 'text-success': (fromAccountBalance - getTransactionAmount)>=0}">
+          ${{ fromAccountBalance }}
+        </div>
+      </div>
+      <label for="fromAccount" class="form-label">
+        <span *ngIf="fromAccountBalance === null && transferForm.get('fromAccountNumber')?.value" class="badge bg-danger">Account not found</span>
       </label>
-      <input type="text" id="fromAccount" formControlName="fromAccountNumber" class="form-control" required
-        (blur)="checkFromAccount()">
+      <input type="text" 
+             id="fromAccount" 
+             formControlName="fromAccountNumber" 
+             class="form-control custom-input" 
+             required
+             (input)="checkFromAccount()">
     </div>
+
     <div class="mb-3">
-      <label for="toAccount" class="form-label fw-bold h5">To Account Number
-        <span *ngIf="toAccountBalance !== null" class="text-primary">
-          ({{ toAccountBalance + getTransctionAmount() }})
-        </span>
-      </label>
-      <input type="text" id="toAccount" formControlName="toAccountNumber" class="form-control" required
-        (blur)="checkToAccount()">
+      <label for="toAccount" class="form-label fw-bold h5">To Account Number</label>
+      <div class="card my-2 p-2" *ngIf="toAccountBalance !== null">
+        <div class="text-muted">Current Balance:</div>
+        <div class="h6" [ngClass]="{'text-success': true}">
+          ${{ toAccountBalance }}
+        </div>
+      </div>
+      <span *ngIf="toAccountBalance === null && transferForm.get('toAccountNumber')?.value" class="badge bg-danger">Account not found</span>
+      <input type="text" 
+             id="toAccount" 
+             formControlName="toAccountNumber" 
+             class="form-control custom-input" 
+             required
+             (input)="checkToAccount()">
     </div>
+
     <div class="mb-3">
       <label for="transferAmount" class="form-label fw-bold h5">Transfer Amount</label>
       <input type="number" id="transferAmount" formControlName="transferAmount" class="form-control" min="1" required>
     </div>
+
     <!-- Send Button -->
     <button type="submit" class="btn btn-primary"
-      [disabled]="transferForm.invalid || !fromAccountBalance || isSameAccount || !toAccountBalance || transferForm.get('transferAmount')?.value > fromAccountBalance">
+      [disabled]="transferForm.invalid || !fromAccountBalance || isSameAccount || !toAccountBalance || transferForm.get('transferAmount')?.value > fromAccountBalance"
+      (click)="updateBalances()">
       Send
     </button>
   </form>

@@ -20,8 +20,8 @@
       <tr *ngFor="let transaction of filteredTransactions">
         <td>{{ transaction.sender }}</td>
         <td>{{ transaction.receiver }}</td>
-        <td>{{ transaction.amount }}</td>
-        <td>{{ transaction.transferDate | date }}</td>
+        <td>{{ transaction.amount | currency }}</td>
+        <td>{{ transaction.transferDate | date:'medium' }}</td>
       </tr>
     </tbody>
   </table>

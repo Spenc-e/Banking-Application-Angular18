@@ -13,19 +13,18 @@
         <label class="form-label fw-bold h5">Account Type</label>
         <div>
           <!-- Radio buttons to select account type -->
-          <input name="accountType" type="radio" id="chequing" value="chequing" formControlName="accountType">
-          <label for="chequing">Chequing</label>
+          <input name="accountType" type="radio" id="chequing" value="chequing" formControlName="accountType" class="me-2">
+             <label for="chequing"> Chequing </label>
         </div>
         <div>
           <!-- Radio buttons to select account type -->
-          <input name="accountType" type="radio" id="savings" value="savings" formControlName="accountType">
-          <label for="savings">Savings</label>
+          <input name="accountType" type="radio" id="savings" value="savings" formControlName="accountType" class="me-2">
+          <label for="savings"> Savings </label>
         </div>
         <div *ngIf="accountForm.get('accountType')?.invalid && accountForm.get('accountType')?.touched" class="text-danger">
           Account type is required.
         </div>
       </div>
-      <!-- <button type="submit" class="btn btn-primary" [disabled]="accountForm.invalid">Create Account</button> -->
       <app-button 
       [accountType]="accountForm.get('accountType')?.value"
       (onClick)="createAccount()"
@@ -53,7 +52,7 @@
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ account.accountNumber }}</td>
             <td>{{ account.accountType }}</td>
-            <td>{{ account.balance }}</td>
+            <td>{{ account.balance | currency }}</td>
           </tr>
         </tbody>
       </table>

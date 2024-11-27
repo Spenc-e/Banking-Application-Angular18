@@ -91,26 +91,30 @@ export class TransferFundsComponent implements OnInit {
       localStorage.setItem('accountStorageLocal', JSON.stringify(this.accounts));
 
       alert('Transfer successful!');
-      this.resetFields();
+      this.updateBalances();
     } else {
       alert('Insufficient balance in From Account!');
     }
   }
 
-  // Method to reset the form fields.
-  resetFields() {
-    this.transferForm.reset();
-    this.fromAccountBalance = null;
-    this.toAccountBalance = null;
-    this.fromAccount = null;
-    this.toAccount = null;
+  //resetFields() {
+  //  this.transferForm.reset();
+  //  this.fromAccountBalance = null;
+  //  this.toAccountBalance = null;
+  //  this.fromAccount = null;
+  //  this.toAccount = null;
+  //}
+
+  updateBalances() {
+    this.checkFromAccount();
+    this.checkToAccount();
   }
+  
   get isSameAccount(): boolean {
     return this.fromAccount && this.toAccount && this.fromAccount.accountNumber === this.toAccount.accountNumber;
   }
 
-  // Getter for the transfer amount.
-  getTransctionAmount(){
+  get getTransactionAmount(){
     return this.transferForm.get('transferAmount')?.value;
   }
 }

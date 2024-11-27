@@ -51,7 +51,7 @@ export class AccountCreationComponent implements OnInit {
     let formData = this.accountForm.value
     formData.accountNumber = this.generateAccountNumber();
     formData.balance = formData.initialBalance;
-    this.localArray.push(formData)
+    this.localArray.push(formData);
     localStorage.setItem("accountStorageLocal", JSON.stringify(this.localArray));
     this.accountForm.reset({
       initialBalance: 0
