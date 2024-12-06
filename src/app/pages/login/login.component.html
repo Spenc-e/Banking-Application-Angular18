@@ -34,14 +34,18 @@
               <label class="form-label" for="typeEmailX">Email</label>
             </div>
             <div data-mdb-input-init class="form-outline form-white mb-4">
-                <input name="username" [(ngModel)]="userRegisterObj.username" type="username" id="typeEmailX" class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX">Username</label>
+          <input name="username" [(ngModel)]="userRegisterObj.username" type="username" id="typeEmailX" class="form-control form-control-lg" />
+          <label class="form-label" for="typeEmailX">Username</label>
               </div>
             <div data-mdb-input-init class="form-outline form-white mb-4">
               <input name="password" [(ngModel)]="userRegisterObj.password" type="password" id="typePasswordX" class="form-control form-control-lg" />
               <label class="form-label" for="typePasswordX">Password</label>
             </div>
-            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" (click)="onRegister()" type="submit">Register</button>
+            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" (click)="onRegister(); isLoginView = true" type="submit">Register</button>
+          </div>
+          <div>
+              <p class="mb-0">Already have an account? <a href="#!" class="text-white-50 fw-bold" (click)="isLoginView = true">Login</a>
+              </p>
           </div>
         }
           </div>
